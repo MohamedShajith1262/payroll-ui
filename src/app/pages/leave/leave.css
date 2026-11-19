@@ -1,0 +1,9 @@
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.reject {
+  background: crimson;
+  color: white;
+}

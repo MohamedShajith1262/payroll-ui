@@ -1,0 +1,43 @@
+<h2>Payroll</h2>
+
+<div class="card">
+  <h3>Calculate Salary</h3>
+
+  @if (authService.isAdmin()) {
+    <label>Employee</label>
+    <select [(ngModel)]="selectedEmployeeId">
+      <option [ngValue]="null">-- select employee --</option>
+      @for (emp of employees; track emp.id) {
+        <option [ngValue]="emp.id">{{ emp.name }}</option>
+      }
+    </select>
+  } @else {
+    <p>Showing payroll for your account</p>
+  }
+
+  <label>Month</label>
+  <input type="month" [(ngModel)]="month">
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <button type="button" (click)="onCalculate()">Calculate</button>
+</div>
+
+@if (result) {
+  <h3>Salary Breakdown: {{ result.employeeName }} ({{ result.month }})</h3>
+  <table>
+    <tbody>
+      <tr><th>Salary Type</th><td>{{ result.salaryType }}</td></tr>
+      <tr><th>Salary Amount</th><td>{{ result.salaryAmount }}</td></tr>
+      <tr><th>Rate Per Day</th><td>{{ result.ratePerDay }}</td></tr>
+      <tr><th>Present Days</th><td>{{ result.presentDays }}</td></tr>
+      <tr><th>Absent Days</th><td>{{ result.absentDays }}</td></tr>
+      <tr><th>Base Pay</th><td>{{ result.basePay }}</td></tr>
+      <tr><th>Overtime Hours</th><td>{{ result.overtimeHours }}</td></tr>
+      <tr><th>Overtime Pay</th><td>{{ result.overtimePay }}</td></tr>
+      <tr><th>Gross Salary</th><td><strong>{{ result.grossSalary }}</strong></td></tr>
+    </tbody>
+  </table>
+}

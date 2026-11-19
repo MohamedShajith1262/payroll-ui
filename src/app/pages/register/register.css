@@ -1,0 +1,26 @@
+.login-box {
+  max-width: 350px;
+  margin: 60px auto;
+  padding: 25px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-box input {
+  padding: 8px;
+}
+
+.login-box button {
+  background-color: #4CAF50;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.error {
+  color: crimson;
+  margin: 0;
+}

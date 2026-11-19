@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Payroll</title>
+    </head>
+    <body>
+        <header class="navbar">
+  <h1>Payroll App</h1>
+  <nav>
+  @if (authService.isLoggedIn()) {
+  @if (authService.isAdmin()) {
+    <a routerLink="/employees" routerLinkActive="active">Employees</a>
+    <a routerLink="/attendance" routerLinkActive="active">Attendance</a>
+  }
+  <a routerLink="/leave" routerLinkActive="active">Leave</a>
+  <a routerLink="/payroll" routerLinkActive="active">Payroll</a>
+  <a href="#" (click)="onLogout(); $event.preventDefault()">Logout</a>
+}
+</nav>
+</header>
+
+<main class="content">
+  <router-outlet />
+</main>
+    </body>
+</html>

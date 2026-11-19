@@ -1,0 +1,65 @@
+<h2>Leave</h2>
+
+@if (!authService.isAdmin()) {
+  <div class="card">
+    <h3>Apply Leave</h3>
+
+    <label>Start Date</label>
+    <input type="date" [(ngModel)]="form.startDate">
+
+    <label>End Date</label>
+    <input type="date" [(ngModel)]="form.endDate">
+
+    <label>Reason</label>
+    <input type="text" [(ngModel)]="form.reason" placeholder="Reason">
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    <button type="button" (click)="onApply()">Apply Leave</button>
+  </div>
+}
+
+<h3>{{ authService.isAdmin() ? 'All Leave Requests' : 'My Leave Requests' }}</h3>
+
+@if (authService.isAdmin() && errorMessage) {
+  <p class="error">{{ errorMessage }}</p>
+}
+
+<table>
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (l of leaves; track l.id) {
+      <tr>
+        <td>{{ l.employeeName }}</td>
+        <td>{{ l.startDate }}</td>
+        <td>{{ l.endDate }}</td>
+        <td>{{ l.reason }}</td>
+        <td>{{ l.status }}</td>
+        <td>
+          @if (authService.isAdmin() && l.status === 'PENDING') {
+            <div class="actions">
+              <button type="button" (click)="onDecision(l.id!, 'APPROVED')">Approve</button>
+              <button type="button" class="reject" (click)="onDecision(l.id!, 'REJECTED')">Reject</button>
+            </div>
+          }
+        </td>
+      </tr>
+    } @empty {
+      <tr><td colspan="6">No leave requests yet</td></tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,26 @@
+<div class="login-box">
+  @if (expectedRole === 'ADMIN') {
+    <h2>Admin Login</h2>
+  } @else {
+    <h2>Employee Login</h2>
+  }
+
+  <label>Username</label>
+  <input type="text" [(ngModel)]="username" placeholder="Username">
+
+  <label>Password</label>
+  <input type="password" [(ngModel)]="password" placeholder="Password">
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <button type="button" (click)="onLogin()">Login</button>
+
+  @if (expectedRole === 'EMPLOYEE') {
+    <a routerLink="/register">New employee? Register</a>
+    <a routerLink="/admin-login">Admin? Login here</a>
+  } @else {
+    <a routerLink="/login">Employee? Login here</a>
+  }
+</div>
