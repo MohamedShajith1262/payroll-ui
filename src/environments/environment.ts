@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'http://localhost:8080/api',
+  production: true,
+  apiUrl: 'https://payroll-backend-production-aec37446.up.railway.app/api',
 };
