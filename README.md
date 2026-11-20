@@ -1,59 +1,38 @@
-# PayrollUi
+# Payroll UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.30.
+Angular frontend for the Mini Payroll & Attendance System.
 
-## Development server
+- Live app: [https://payroll-ui-sigma.vercel.app]
+- Admin login: https://payroll-ui-sigma.vercel.app/admin-login
+- Backend repo (API, database schema, architecture, API list): [https://github.com/mohamedshajith/payroll-backend]
 
-To start a local development server, run:
+## Pages
 
-```bash
-ng serve
-```
+| Page | Who can open it |
+|---|---|
+| Employee Login (`/login`), Register (`/register`) | Public |
+| Admin Login (`/admin-login`) | Public |
+| Employees, Attendance | Admin |
+| Leave, Payroll | Admin and Employee (employees see only their own data) |
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Structure
 
-## Code scaffolding
+- `src/app/pages`: the screens (login, register, employees, attendance, leave, payroll)
+- `src/app/core`: services (auth, employee, attendance, leave, payroll), the JWT interceptor, route guards, and models
+- `src/environments`: the API URL (no URL is hardcoded in the code)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Run locally
 
-```bash
-ng generate component component-name
-```
+1. `npm install`
+2. Set `apiUrl` in `src/environments/environment.ts`, for example `http://localhost:8080/api`
+3. `ng serve`
+4. Open http://localhost:4200
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build
 
-```bash
-ng generate --help
-```
+`ng build` creates the production files in `dist/`.
 
-## Building
+## Notes
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- The JWT is attached to every request by an HTTP interceptor.
+- Route guards block pages for users who are not logged in or lack the role. The backend enforces the same rules, so a role check in the UI is only for a better experience.
